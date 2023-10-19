@@ -1,6 +1,8 @@
 
 import { NavLink } from "react-router-dom";
-import user from "/user.png";
+import userImg from "/user.png";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProviders/AuthProviders";
 
 
 
@@ -8,27 +10,33 @@ import user from "/user.png";
 
 const Navbar = () => {
 
+
+    const { user,logOut } = useContext(AuthContext)
+
     const links = <>
         <li><NavLink to='/'
             className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
-          }
-            >Home</NavLink></li>
+                isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
+            }
+        >Home</NavLink></li>
         <li><NavLink to='/add-product'
             className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
-          }
-            >Add Product</NavLink></li>
+                isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
+            }
+        >Add Product</NavLink></li>
         <li><NavLink to='/my-cart'
             className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
-          }
-            >My Cart</NavLink></li>
-       
+                isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
+            }
+        >My Cart</NavLink></li>
+
 
     </>
 
- 
+
+const handleLogout=()=>{
+    logOut();
+}
 
     return (
 
@@ -39,7 +47,7 @@ const Navbar = () => {
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 w-52">
+                    <ul tabIndex={0} className="menu menu-sm dropdown-content text-[#363636] mt-3 z-[1] p-2 bg-base-100 w-52">
                         {links}
                     </ul>
                 </div>
@@ -51,8 +59,18 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <img className="w-10 h-10 mr-5" src={user} alt="" />
-                <NavLink to="/login" className="hover:text-[#eb1c3a]">Login</NavLink>
+                {
+                    user ?
+                        <><img className="w-10 h-10 rounded-full bg-fit mr-5" src={`${user.photoURL
+                        }`} alt="" />
+                        <p className="mr-2">{user.displayName}</p>
+                            <button onClick={handleLogout} className="hover:text-[#eb1c3a] font-semibold">Logout</button>
+                            </>
+                        :
+                        <>
+                            <img className="w-10 h-10 mr-5" src={userImg} alt="" />
+                            <NavLink to="/login" className="hover:text-[#eb1c3a] font-semibold">Login</NavLink></>
+                }
             </div>
         </div>
     );

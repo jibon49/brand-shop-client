@@ -1,13 +1,37 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../../AuthProviders/AuthProviders';
+import { updateProfile } from 'firebase/auth';
+
+
+
 
 const Register = () => {
+
+    const {createUser} = useContext(AuthContext)
+
+    const handleRegister=e=>{
+        e.preventDefault();
+        const form = e.target
+
+        const email = form.email.value
+        const password = form.password.value
+        const name= form.name.value
+        const photoUrl = form.photoUrl.value
+ 
+        createUser(email, password, name, photoUrl)
+
+
+    }
+
+
     return (
         <div>
             <div className="className=mt-20 max-w-6xl mx-auto">
                 <div className="hero-content flex-col lg:flex-row-reverse mb-20">
                     <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
-                        <form className="card-body text-[#403F3F]">
+                        <form onSubmit={handleRegister} className="card-body text-[#403F3F]">
                             <div className="form-control">
                                 <h1 className="text-center text-4xl font-semibold">Register your account</h1>
                                 <hr className="my-12" />

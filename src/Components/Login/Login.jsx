@@ -1,13 +1,35 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../../AuthProviders/AuthProviders';
 
 const Login = () => {
+
+
+    const { logIn } = useContext(AuthContext)
+
+    const handleLogin = e => {
+        e.preventDefault();
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+
+        logIn(email,password)
+        .then(result=>{
+            console.log("sign in successful")
+        })
+        .catch(error=>{
+            console.log(error.message)
+        })
+    }
+
+
     return (
         <div>
             <div className="className=mt-20 max-w-6xl mx-auto">
                 <div className="hero-content flex-col lg:flex-row-reverse mb-20">
                     <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
-                        <form className="card-body text-[#403F3F]">
+                        <form onSubmit={handleLogin} className="card-body text-[#403F3F]">
                             <div className="form-control">
                                 <h1 className="text-center text-4xl font-semibold">Login your account</h1>
                                 <hr className="my-12" />

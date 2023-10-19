@@ -14,45 +14,46 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Brands from './Components/Brands/Brands';
 import Brand from './Components/Brand/Brand';
+import AuthProviders from './AuthProviders/AuthProviders';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
-    errorElement:<Error></Error>,
-    children:[
-     {
-      path:"/",
-      element:<Home></Home>
-     },
-     {
-      path:"/add-product",
-      element:<AddProduct></AddProduct>
-     },
-     {
-      path:"/my-cart",
-      element:<Cart></Cart>
-     },
-     {
-      path:"/login",
-      element:<Login></Login>
-     },
-     {
-      path:"/register",
-      element:<Register></Register>
-     },
-     {
-      path:"/brands",
-      element:<Brands></Brands>
-     },
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>
+      },
+      {
+        path: "/add-product",
+        element: <AddProduct></AddProduct>
+      },
+      {
+        path: "/my-cart",
+        element: <Cart></Cart>
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
+        path: "/register",
+        element: <Register></Register>
+      },
+      {
+        path: "/brands",
+        element: <Brands></Brands>
+      },
 
-     {
-      path:"/brand/:brandName",
-      element:<Brand></Brand>,
-      loader:()=>fetch('/brandJson.js')
-      
-     }
-     
+      {
+        path: "/brand/:brandName",
+        element: <Brand></Brand>,
+        loader: () => fetch('/brandJson.js')
+
+      }
+
 
     ]
   },
@@ -60,6 +61,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProviders>
+      <RouterProvider router={router} />
+    </AuthProviders>
   </React.StrictMode>,
 )
