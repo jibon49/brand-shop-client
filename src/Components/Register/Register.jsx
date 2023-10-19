@@ -1,26 +1,50 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../../AuthProviders/AuthProviders';
-import { updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2'
 
 
 
 
 const Register = () => {
 
-    const {createUser} = useContext(AuthContext)
+    const { createUser,user } = useContext(AuthContext)
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
 
-    const handleRegister=e=>{
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleRegister = e => {
         e.preventDefault();
         const form = e.target
 
         const email = form.email.value
         const password = form.password.value
-        const name= form.name.value
+        const name = form.name.value
         const photoUrl = form.photoUrl.value
- 
-        createUser(email, password, name, photoUrl)
+
+        if (password.length > 6) {
+            if (passwordRegex.test(password)) {
+                createUser(email, password, name, photoUrl)
+                if(user){
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Login Success',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                      })
+                }
+                navigate(location?.state ? location.state : '/')
+                
+            }
+            else{
+                toast.error("Password must be contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
+            }
+        }
+        else{
+            toast.error("Password must be at least 6 character long")
+        }
 
 
     }
