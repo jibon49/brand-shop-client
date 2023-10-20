@@ -12,12 +12,14 @@ import './AllProducts.css';
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import UpdateProduct from "../UpdateProduct/UpdateProduct";
+import { useState } from "react";
 
 
 
 const AllProducts = () => {
 
-    const products = useLoaderData();
+    const loadedProducts = useLoaderData();
+    const [products, setProducts] = useState(loadedProducts)
 
     return (
         <div className="">
@@ -78,6 +80,8 @@ const AllProducts = () => {
                     products.map(product=>
                     <UpdateProduct key={product._id}
                     product={product}
+                    products={products}
+                    setProducts={setProducts}
                     >
                     </UpdateProduct>)
                 }

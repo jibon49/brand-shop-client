@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types'; // ES6
 import { BsPencilFill } from 'react-icons/bs';
-import { FaRegEye,FaWindowClose } from 'react-icons/fa';
+import { FaRegEye, FaWindowClose } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
-const UpdateProduct = ({ product }) => {
+const UpdateProduct = ({ product, products, setProducts }) => {
 
     const { _id, name, imageUrl, brandName, productType, price, shortDescription, ratings } = product
 
-    const [remaining, setRemaining] = useState(null)
 
-    const handleDelete =()=>{
+    const handleDelete = (_id) => {
 
         Swal.fire({
             title: 'Are you sure?',
@@ -20,28 +20,31 @@ const UpdateProduct = ({ product }) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-           
 
-            fetch(`http://localhost:5000/products/${_id}`,{
-                method:"DELETE"
-            })
-            .then(res=>res.json())
-            .then(data=>{
-                console.log(data)
-                if(data.deletedCount>0){
-                    Swal.fire(
-                        'Deleted!',
-                        'Your product has been deleted.',
-                        'success'
-                      )
-                }
-            })
+
+                fetch(`http://localhost:5000/products/${_id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.deletedCount > 0) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your product has been deleted.',
+                                'success'
+                            )
+                            const remaining = products.filter(pro=>pro._id !==_id)
+                            setProducts(remaining)
+                        }
+                    })
 
             }
-          })
+        })
     }
+
 
     return (
         <div className="card card-side p-5 text-start">
@@ -56,13 +59,21 @@ const UpdateProduct = ({ product }) => {
                 <div className="card-actions justify-end">
                     <div className="btn-group btn-group-vertical">
                         <button className="btn text-xl"><FaRegEye></FaRegEye></button>
-                        <button className="btn text-xl"><BsPencilFill></BsPencilFill></button>
-                        <button onClick={()=>handleDelete(_id)} className="btn text-xl"><FaWindowClose></FaWindowClose></button>
+                        <Link to={`/update/${_id}`}>
+                            <button className="btn text-xl"><BsPencilFill></BsPencilFill></button>
+                        </Link>
+                        <button onClick={() => handleDelete(_id)} className="btn text-xl"><FaWindowClose></FaWindowClose></button>
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+UpdateProduct.propTypes = {
+    product: PropTypes.object,
+    products: PropTypes.object,
+    setProducts: PropTypes.object
+
+  };
 
 export default UpdateProduct;
