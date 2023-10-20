@@ -36,7 +36,7 @@ const UpdateProduct = ({ product, products, setProducts }) => {
                                 'Your product has been deleted.',
                                 'success'
                             )
-                            const remaining = products.filter(pro=>pro._id !==_id)
+                            const remaining = products.filter(pro => pro._id !== _id)
                             setProducts(remaining)
                         }
                     })
@@ -58,7 +58,9 @@ const UpdateProduct = ({ product, products, setProducts }) => {
                 </div>
                 <div className="card-actions justify-end">
                     <div className="btn-group btn-group-vertical">
-                        <button className="btn text-xl"><FaRegEye></FaRegEye></button>
+                        <Link to={`/details/${_id}`}>
+                            <button className="btn text-xl"><FaRegEye></FaRegEye></button>
+                        </Link>
                         <Link to={`/update/${_id}`}>
                             <button className="btn text-xl"><BsPencilFill></BsPencilFill></button>
                         </Link>
@@ -74,6 +76,6 @@ UpdateProduct.propTypes = {
     products: PropTypes.object,
     setProducts: PropTypes.object
 
-  };
+};
 
 export default UpdateProduct;
