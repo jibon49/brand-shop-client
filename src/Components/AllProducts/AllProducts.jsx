@@ -1,15 +1,14 @@
 import { useLoaderData } from "react-router-dom";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import './AllProducts.css';
 
-// import required modules
+
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import UpdateProduct from "../UpdateProduct/UpdateProduct";
 import { useState } from "react";

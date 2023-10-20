@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
+
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
+import './CustomerReview.css'
 
-import '../../App.css';
-
-// import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
 
-import '../../App.css';
 
 
 const CustomerReview = () => {
@@ -57,8 +53,8 @@ const CustomerReview = () => {
                 {
                     customers.map(customer =>
                         <SwiperSlide key={customer.id}>
-                            <div className=" card card-compact p-5 h-[405px]  bg-[#edeaeb]">
-                                <figure><img src={customer.image}  /></figure>
+                            <div className=" card card-compact p-5  bg-[#edeaeb]">
+                                <figure className="rounded-full bg-cover "><img className="" src={customer.image}  /></figure>
                                 <div className="card-body">
                                     <h2 className="text-xl font-bold text-center">{customer.name}</h2>
                                     <p className="text-lg font-semibold">{customer.profession}</p>

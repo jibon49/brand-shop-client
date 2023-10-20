@@ -48,8 +48,8 @@ const UpdateProduct = ({ product, products, setProducts }) => {
 
     return (
         <div className="card card-side p-5 text-start">
-            <figure><img src={imageUrl} /></figure>
-            <div className="flex items-center">
+            <figure><img className='h-40' src={imageUrl} /></figure>
+            <div className="flex items-center justify-around">
                 <div className="p-5">
                     <h2 className="card-title">{name}</h2>
                     <p>Type:{productType}</p>
@@ -73,8 +73,8 @@ const UpdateProduct = ({ product, products, setProducts }) => {
 };
 UpdateProduct.propTypes = {
     product: PropTypes.object,
-    products: PropTypes.object,
-    setProducts: PropTypes.object
+    products: PropTypes.array,
+    setProducts: PropTypes.func
 
 };
 

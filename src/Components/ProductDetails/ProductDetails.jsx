@@ -12,7 +12,7 @@ const ProductDetails = () => {
     return (
         <div className="my-10 p-20">
             <div className="p-10 card lg:card-side bg-base-100 shadow-xl">
-                <img className="w-1/2" src={imageUrl} />
+                <img className="h-72" src={imageUrl} />
                 <div className="card-body text-[#5C5B5B]">
                     <h2 className="text-2xl font-bold text-black">{name}</h2>
                     <p className="text-lg"><span className="text-black font-semibold">Brand:</span> {brandName}</p>
