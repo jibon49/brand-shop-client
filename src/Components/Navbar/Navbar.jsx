@@ -29,6 +29,11 @@ const Navbar = () => {
                 isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
             }
         >My Cart</NavLink></li>
+        <li><NavLink to='/all-products'
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "text-[#eb1c3a] font-bold" : ""
+            }
+        >All Products</NavLink></li>
 
 
     </>
