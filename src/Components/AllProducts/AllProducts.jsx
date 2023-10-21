@@ -74,7 +74,7 @@ const AllProducts = () => {
 
             <div className="my-20 max-w-7xl mx-auto mt-20">
                 <h1 className="text-3xl font-bold">All Products</h1>
-               <div className="grid grid-cols-2 gap-5 m-20 text-center">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:m-20 text-center">
                {
                     products.map(product=>
                     <UpdateProduct key={product._id}

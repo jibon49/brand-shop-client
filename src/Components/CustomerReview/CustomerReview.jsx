@@ -54,7 +54,7 @@ const CustomerReview = () => {
                     customers.map(customer =>
                         <SwiperSlide key={customer.id}>
                             <div className=" card card-compact p-5  bg-[#edeaeb]">
-                                <figure className="rounded-full bg-cover "><img className="" src={customer.image}  /></figure>
+                                <figure className="rounded-full bg-cover "><img style={{ height: '10rem', width: '10rem', borderRadius:'100%' }} className="" src={customer.image}  /></figure>
                                 <div className="card-body">
                                     <h2 className="text-xl font-bold text-center">{customer.name}</h2>
                                     <p className="text-lg font-semibold">{customer.profession}</p>

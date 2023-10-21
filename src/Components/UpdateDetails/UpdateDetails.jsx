@@ -47,11 +47,11 @@ const UpdateDetails = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto mt-20">
+        <div className="max-w-7xl p-3  mx-auto mt-20">
             <form onSubmit={handleUpdate}>
 
                 {/* name and image */}
-                <div className="flex md:flex gap-5">
+                <div className="flex flex-col md:flex-row gap-5">
                     <div className="form-control md:w-1/2">
                         <label className="label">
                             <span className="text-xl font-semibold">Product Name</span>
