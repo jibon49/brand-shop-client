@@ -18,7 +18,7 @@ const AddProduct = () => {
 
         console.log(addProduct);
 
-        fetch('http://localhost:5000/products',{
+        fetch('https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/products',{
             method:"POST",
             headers:{
                 'content-type':'application/json'
@@ -37,7 +37,7 @@ const AddProduct = () => {
                   })
             }
         })
-        
+        form.reset();
     }
 
     return (
@@ -84,7 +84,8 @@ const AddProduct = () => {
                             <option value="phone">Phone</option>
                             <option value="headphone">Headphone</option>
                             <option value="airpod">Airpod</option>
-                            <option value="Laptop">Laptop</option>
+                            <option value="laptop">Laptop</option>
+                            <option value="watch">Watch</option>
                         </select>
                     </div>
                 </div>

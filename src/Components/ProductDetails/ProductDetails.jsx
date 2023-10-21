@@ -1,11 +1,13 @@
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProviders/AuthProviders";
 
 
 const ProductDetails = () => {
 
+    const {user} = useContext(AuthContext)
 
     const products = useLoaderData();
 
@@ -16,10 +18,10 @@ const ProductDetails = () => {
 
     const { name, imageUrl, brandName, productType, price, shortDescription, ratings } = product
 
-    const [ cart, setCart ] = useState([]);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/cart')
+        fetch('https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/cart')
             .then(res => res.json())
             .then(data => {
                 setCart(data)
@@ -31,16 +33,16 @@ const ProductDetails = () => {
         const inCart = cart.find(prod => prod._id === id)
 
         if (inCart) {
-            
+
             Swal.fire({
                 title: 'Error!',
                 text: 'Product already in cart',
                 icon: 'error',
                 confirmButtonText: 'Ok'
-              })
+            })
         }
-        else{
-            fetch(`http://localhost:5000/cart`, {
+        else {
+            fetch(`https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/cart`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -50,21 +52,21 @@ const ProductDetails = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    if(data.insertedId){
-                    Swal.fire({
-                        title: 'Success',
-                        text: 'Product added to cart successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Cool'
-                      })
+                    if (data.insertedId) {
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Product added to cart successfully',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
                     }
-                    else{
+                    else {
                         Swal.fire({
                             title: 'Error!',
                             text: data.message,
                             icon: 'error',
                             confirmButtonText: 'Ok'
-                          })
+                        })
                     }
                 })
         }
@@ -90,7 +92,16 @@ const ProductDetails = () => {
                     <p className="text-lg"><span className="text-black font-semibold">Description:</span> {shortDescription}</p>
                     <div className="flex items-center">
                         <Link className="text-xl font-bold text-blue-400" to='/all-products'><div className="flex items-center"><BiArrowBack></BiArrowBack>Go back</div></Link>
-                        <button onClick={() => handleAddToCart(product._id)} className="btn md:w-1/4 ml-4">Add to Cart</button>
+
+                        {
+                            user ?
+                            <button onClick={() => handleAddToCart(product._id)} className="btn md:w-1/4 ml-4">Add to Cart</button>
+                            :
+                            <Link to='/login' className="w-3/4">
+                            <button className="btn md:w-1/4 ml-4">Add to Cart</button>
+                            </Link>
+                        }
+                        
                     </div>
                 </div>
             </div>

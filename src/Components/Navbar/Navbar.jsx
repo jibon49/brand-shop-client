@@ -1,7 +1,7 @@
 
 import { NavLink } from "react-router-dom";
 import userImg from "/user.png";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProviders/AuthProviders";
 
 
@@ -9,6 +9,24 @@ import { AuthContext } from "../../AuthProviders/AuthProviders";
 
 
 const Navbar = () => {
+
+
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme"):"light");
+
+    useEffect(()=>{
+        localStorage.setItem("theme",theme);
+        const localTheme = localStorage.getItem("theme");
+        document.querySelector("html").setAttribute("data-theme", localTheme);
+    },[theme]);
+
+    const toggleTheme = (e)=>{
+        if(e.target.checked){
+            setTheme("dark");
+        }
+        else{
+            setTheme("light");
+        }
+    }
 
 
     const { user,logOut } = useContext(AuthContext)
@@ -56,7 +74,7 @@ const handleLogout=()=>{
                         {links}
                     </ul>
                 </div>
-                <a className=" normal-case text-xl">TechBay</a>
+                <a className=" normal-case font-extrabold text-xl text-[#eb1c3a]">TechBay</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="flex gap-5 px-1">
@@ -64,6 +82,10 @@ const handleLogout=()=>{
                 </ul>
             </div>
             <div className="navbar-end">
+            <input type="checkbox" 
+            onChange={toggleTheme} 
+            checked={theme === "light" ? false : true}
+            className="toggle toggle-error mr-5" />
                 {
                     user ?
                         <><img className="w-10 h-10 rounded-full bg-fit mr-5" src={`${user.photoURL

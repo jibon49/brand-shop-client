@@ -19,6 +19,7 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import AllProducts from './Components/AllProducts/AllProducts';
 import UpdateDetails from './Components/UpdateDetails/UpdateDetails';
 import ProductDetails from './Components/ProductDetails/ProductDetails';
+import { ThemeProvider } from './ThemeContext/ThemeContext';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       {
         path: "/my-cart",
         element: <PrivateRoute><Cart></Cart></PrivateRoute>,
-        loader:()=>fetch('http://localhost:5000/cart')
+        loader: () => fetch('https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/cart')
       },
       {
         path: "/login",
@@ -54,25 +55,25 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <UpdateDetails></UpdateDetails>,
-        loader:()=>fetch(`http://localhost:5000/products`)
-        
+        loader: () => fetch(`https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/products`)
+
       },
       {
         path: "/details/:id",
         element: <ProductDetails></ProductDetails>,
-        loader:()=>fetch(`http://localhost:5000/products`)
-        
+        loader: () => fetch(`https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/products`)
+
       },
       {
         path: "/all-products",
         element: <AllProducts></AllProducts>,
-        loader: ()=>fetch('http://localhost:5000/products')
+        loader: () => fetch('https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/products')
       },
 
       {
         path: "/brand/:brandName",
         element: <Brand></Brand>,
-        loader: ({params}) => fetch(`http://localhost:5000/products/${params.brandName}`)
+        loader: ({ params }) => fetch(`https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/products/${params.brandName}`)
 
       }
 
@@ -83,8 +84,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProviders>
-      <RouterProvider router={router} />
-    </AuthProviders>
+    <ThemeProvider>
+      <AuthProviders>
+        <RouterProvider router={router} />
+      </AuthProviders>
+    </ThemeProvider>
   </React.StrictMode>,
 )

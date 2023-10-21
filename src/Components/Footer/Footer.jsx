@@ -16,7 +16,7 @@ const Footer = () => {
                 </nav>
 
                 <nav className=" lg:w-96 text">
-                    <header className="footer-title mx-auto text-5xl">TechByte</header>
+                    <header className="footer-title mx-auto text-5xl">TechBay</header>
                     <h1 className="text-center text-xl mx-auto mb-10 text-orange-500">DON’T MISS OUR FEATURE UPDATE</h1>
                     <div className="relative w-full">
                         <input type="text" placeholder="Your email" className="input input-bordered w-full pr-16" />
@@ -32,7 +32,7 @@ const Footer = () => {
                     </div>
                     <div className='flex items-center gap-3'>
                         <HiOutlineMailOpen className='text-2xl'></HiOutlineMailOpen>
-                        <a className="link link-hover">info@techbyte.com</a>
+                        <a className="link link-hover">info@TechBay.com</a>
                     </div>
                     <div className='flex items-center gap-3'>
                         <CiLocationOn className='text-2xl'></CiLocationOn>
@@ -44,7 +44,7 @@ const Footer = () => {
             </footer>
             <aside className="bg-[#363636] text-white text-center p-5">
                 <hr className="p-2" />
-                <p>Copyright © 2023 - All right reserved by TechByte Ltd</p>
+                <p>Copyright © 2023 - All right reserved by TechBay Ltd</p>
             </aside>
         </footer>
     );

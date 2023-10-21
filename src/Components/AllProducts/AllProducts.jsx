@@ -12,11 +12,13 @@ import './AllProducts.css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import UpdateProduct from "../UpdateProduct/UpdateProduct";
 import { useState } from "react";
+import { useTheme } from "../../ThemeContext/ThemeContext";
 
 
 
 const AllProducts = () => {
 
+    const{theme} = useTheme();
     const loadedProducts = useLoaderData();
     const [products, setProducts] = useState(loadedProducts)
 
@@ -73,7 +75,12 @@ const AllProducts = () => {
             </Swiper>
 
             <div className="my-20 max-w-7xl mx-auto mt-20">
-                <h1 className="text-3xl font-bold">All Products</h1>
+                {
+                    theme === 'dark' ?
+                    <h1 className="text-3xl font-bold text-white">All Products</h1>
+                    :
+                    <h1 className="text-3xl font-bold">All Products</h1>
+                }
                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:m-20 text-center">
                {
                     products.map(product=>

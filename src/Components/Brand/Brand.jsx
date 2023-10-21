@@ -8,8 +8,12 @@ import 'swiper/css/navigation';
 
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import './Brand.css';
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProviders/AuthProviders";
 
 const Brand = () => {
+
+    const { user } = useContext(AuthContext)
     const brandProducts = useLoaderData();
 
     return (
@@ -32,7 +36,7 @@ const Brand = () => {
                     {brandProducts.slice(0, 3).map((product) => (
                         <SwiperSlide key={product._id}>
                             <div className="w-4/5 bg-white flex items-center p-5 md:p-24 mx-auto">
-                                <img style={{ height: '15rem', width: 'auto' }}  src={product.imageUrl} alt="" />
+                                <img style={{ height: '15rem', width: 'auto' }} src={product.imageUrl} alt="" />
                                 <div className="text-[#575757]">
                                     <h1 className="text-xl md:text-7xl md:mb-7 font-semibold">{product.name}</h1>
                                     <p className="md:text-2xl font-medium">Newly Released</p>
@@ -66,7 +70,7 @@ const Brand = () => {
 
             <div className="grid md:grid-cols-3 gap-5">
                 {brandProducts.map((product) => (
-                    <div key={product._id} className="card text-[#434343] text-center bg-base-100 shadow-xl">
+                    <div key={product._id} className="card text-[#434343] text-center bg-base-300 shadow-xl">
                         <figure className="p-5">
                             <img className="h-40" src={product.imageUrl} alt="Shoes" />
                         </figure>
@@ -77,16 +81,33 @@ const Brand = () => {
                             <p className="text-lg">Rating:{product.ratings}</p>
                             <hr />
                             <div className="">
-                                <NavLink
-                                product={product}
-                                 to={`/details/${product._id}`}><button className="btn">
-                                    <FaRegEye></FaRegEye>
-                                </button></NavLink>
-                                <NavLink
-                                to={`/update/${product._id}`}
-                                ><button className="btn ml-4">
-                                    <FaPen></FaPen>
-                                </button></NavLink>
+                                {
+                                    user ?
+                                        <NavLink
+                                            product={product}
+                                            to={`/details/${product._id}`}><button className="btn">
+                                                <FaRegEye></FaRegEye>
+                                            </button>
+
+                                        </NavLink>
+                                        :
+                                        <NavLink
+                                            to='/login'><button className="btn">
+                                                <FaRegEye></FaRegEye>
+                                            </button>
+
+                                        </NavLink>
+                                }
+                                {
+                                    user &&
+                                    <NavLink
+                                        to={`/update/${product._id}`}
+                                    >
+                                        <button className="btn ml-4">
+                                            <FaPen></FaPen>
+                                        </button>
+                                    </NavLink>
+                                }
                             </div>
                         </div>
                     </div>

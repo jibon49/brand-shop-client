@@ -28,7 +28,7 @@ const Cart = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log('Deleting item with id:', id);
-                fetch(`http://localhost:5000/cart/${id}`, {
+                fetch(`https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/cart/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -55,11 +55,12 @@ const Cart = () => {
 
     return (
         <div>
-            <h1>My Cart:{cartItems.length}</h1>
             <div>
+
                 {
                     cartItems.length > 0 ?
                         <div>
+                            <h1 className="text-3xl font-bold text-center p-20">Available Items in Cart</h1>
                             <div className="overflow-x-auto">
                                 <table className="table">
                                     {/* head */}
@@ -116,9 +117,12 @@ const Cart = () => {
 
                         </div>
                         :
-                        <div>
-                            <h1>No items in cart</h1>
+                        <div className="text-center p-8">
+                            <img src="https://i.ibb.co/HLZQVVP/empty-cart-2130356-1800917.webp" alt="Empty Cart" className="mx-auto mb-4" />
+                            <h1 className="text-2xl font-bold mb-2">Your Cart is Empty</h1>
+                            <p className="text-gray-600">Explore our products and start adding items to your cart!</p>
                         </div>
+
                 }
             </div>
         </div>

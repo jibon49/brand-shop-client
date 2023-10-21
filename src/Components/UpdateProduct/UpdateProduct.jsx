@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types'; // ES6
+import { useContext } from 'react';
 import { BsPencilFill } from 'react-icons/bs';
 import { FaRegEye, FaWindowClose } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../AuthProviders/AuthProviders';
 
 
 const UpdateProduct = ({ product, products, setProducts }) => {
+
+    const {user} = useContext(AuthContext)
 
     const { _id, name, imageUrl,  productType, price,  ratings } = product
 
@@ -24,7 +28,7 @@ const UpdateProduct = ({ product, products, setProducts }) => {
             if (result.isConfirmed) {
 
 
-                fetch(`http://localhost:5000/products/${_id}`, {
+                fetch(`https://techbay-assignment-server-8drflemwz-jibon49.vercel.app/products/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -56,7 +60,9 @@ const UpdateProduct = ({ product, products, setProducts }) => {
                     <p>Price:$ {price}</p>
                     <p>Rating: {ratings}</p>
                 </div>
-                <div className="card-actions justify-end">
+                {
+                    user ?
+                    <div className="card-actions justify-end">
                     <div className="btn-group btn-group-vertical">
                         <Link to={`/details/${_id}`}>
                             <button className="btn text-xl"><FaRegEye></FaRegEye></button>
@@ -67,6 +73,11 @@ const UpdateProduct = ({ product, products, setProducts }) => {
                         <button onClick={() => handleDelete(_id)} className="btn text-xl"><FaWindowClose></FaWindowClose></button>
                     </div>
                 </div>
+                :
+                <Link to={`/details/${_id}`}>
+                            <button className="btn text-xl"><FaRegEye></FaRegEye></button>
+                        </Link>
+                }
             </div>
         </div>
     );
