@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 const UpdateProduct = ({ product, products, setProducts }) => {
 
-    const { _id, name, imageUrl, brandName, productType, price, shortDescription, ratings } = product
+    const { _id, name, imageUrl,  productType, price,  ratings } = product
 
 
     const handleDelete = (_id) => {

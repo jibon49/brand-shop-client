@@ -82,9 +82,11 @@ const Brand = () => {
                                  to={`/details/${product._id}`}><button className="btn">
                                     <FaRegEye></FaRegEye>
                                 </button></NavLink>
-                                <button className="btn ml-4">
+                                <NavLink
+                                to={`/update/${product._id}`}
+                                ><button className="btn ml-4">
                                     <FaPen></FaPen>
-                                </button>
+                                </button></NavLink>
                             </div>
                         </div>
                     </div>

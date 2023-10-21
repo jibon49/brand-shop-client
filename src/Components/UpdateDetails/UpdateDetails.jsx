@@ -1,13 +1,17 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
 const UpdateDetails = () => {
 
 
-    const product = useLoaderData();
 
-    const {_id,name, imageUrl, brandName, productType, price, shortDescription, ratings} = product
+    const products = useLoaderData();
+    const{id} = useParams();
+
+    const product = products.find(prod=> prod._id === id)
+
+    const {_id,name, imageUrl, price, shortDescription, ratings} = product
 
     const handleUpdate = e =>{
         e.preventDefault();
@@ -35,7 +39,7 @@ const UpdateDetails = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            if(data.insertedId){
+            if(data.modifiedCount>0){
                 Swal.fire({
                     title: 'Success',
                     text: 'Product updated successfully',
